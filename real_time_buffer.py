@@ -14,14 +14,14 @@ buffer_2 = []
 output = np.array([])
 rate = 48000
 flag = 1
-gain_range_0_500 = 1.2;
-gain_range_500_1000 = 1.5;
-gain_range_1000_1500 = 1.1;
-gain_range_1500_2000 = 1.2;
-gain_range_2000_2500 = 1.2;
-gain_range_2500_3000 = 1.5;
+gain_range_0_500 = 1;
+gain_range_500_1000 = 1;
+gain_range_1000_1500 = 1;
+gain_range_1500_2000 = 1;
+gain_range_2000_2500 = 1;
+gain_range_2500_3000 = 1;
 gain_range_3000_3500 = 1;
-gain_range_3500_4000 = 1.5;
+gain_range_3500_4000 = 1;
 
 def gain_filter(y):
 	global gain_range_0_500, gain_range_500_1000, gain_range_1000_1500, gain_range_1500_2000, gain_range_2000_2500, gain_range_2500_3000, gain_range_3000_3500, gain_range_3500_4000 
@@ -126,6 +126,16 @@ def record_audio():
     output_stream.close()
     p.terminate()
 
+f = open('gain.txt','r')
+Gain = f.readline().split(',')
+gain_range_0_500 = Gain[0];
+gain_range_500_1000 = Gain[1];
+gain_range_1000_1500 = Gain[2];
+gain_range_1500_2000 = Gain[3];
+gain_range_2000_2500 = Gain[4];
+gain_range_2500_3000 = Gain[5];
+gain_range_3000_3500 = Gain[6];
+gain_range_3500_4000 = Gain[7];
 t1 = Thread(target=record_audio, args=())
 t2 = Thread(target=process_audio, args=())
 t1.start()
