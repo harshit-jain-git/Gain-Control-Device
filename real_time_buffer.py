@@ -12,7 +12,7 @@ from scipy.signal import butter, sosfilt, lfilter, buttord
 buffer_1 = []
 buffer_2 = []
 output = np.array([])
-rate = 36000
+rate = 48000
 flag = 1
 gain_range_0_500 = 1.2;
 gain_range_500_1000 = 1.5;
@@ -37,7 +37,7 @@ def gain_filter(y):
 
 def gain_correction(y, a, b, gain):
 	N = 1024;
-	Fs = 36000;
+	Fs = 48000;
 	out = y;
 	out[-(N*b)/Fs + N/2 : -(N*a)/Fs + N/2] = gain * y[-(N*b)/Fs + N/2 : -(N*a)/Fs + N/2]
 	out[(N*a)/Fs + N/2 : (N*b)/Fs + N/2] = gain * y[(N*a)/Fs + N/2 : (N*b)/Fs + N/2]
@@ -95,7 +95,7 @@ def record_audio():
 
     output_stream = p.open(format=FORMAT,
                            channels=CHANNELS,
-                           rate=35000,
+                           rate=46000,
                            output=True)
 
     raw_data = stream.read(CHUNK)
