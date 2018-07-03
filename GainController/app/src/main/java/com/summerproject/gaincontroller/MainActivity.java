@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 System.out.println("Thread started");
                 try {
-                    Socket s = new Socket("10.184.27.97", 7000);
+                    Socket s = new Socket("10.194.10.81", 7000);
                     DataOutputStream dos = new DataOutputStream(s.getOutputStream());
                     while (true) {
                         while (flag) {
@@ -180,17 +181,18 @@ public class MainActivity extends AppCompatActivity {
                             int seekBarValue8 = simpleSeekBar8.getProgress();
 
                             JSONArray arr = new JSONArray();
-                            arr.put(seekBarValue1);
-                            arr.put(seekBarValue2);
-                            arr.put(seekBarValue3);
-                            arr.put(seekBarValue4);
-                            arr.put(seekBarValue7);
-                            arr.put(seekBarValue6);
-                            arr.put(seekBarValue5);
-                            arr.put(seekBarValue8);
+                            arr.put(modified_gain(seekBarValue1));
+                            arr.put(modified_gain(seekBarValue2));
+                            arr.put(modified_gain(seekBarValue3));
+                            arr.put(modified_gain(seekBarValue4));
+                            arr.put(modified_gain(seekBarValue7));
+                            arr.put(modified_gain(seekBarValue6));
+                            arr.put(modified_gain(seekBarValue5));
+                            arr.put(modified_gain(seekBarValue8));
                             System.out.println(arr.toString());
 
-                            dos.writeBytes(arr.toString());
+                            dos.writeUTF(arr.toString());
+                            dos.flush();
                             flag = false;
                         }
                         sleep(500);
@@ -204,6 +206,32 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            private double modified_gain(int a) {
+                switch (a) {
+                    case 0: return 1.0;
+
+                    case 1: return 1.1;
+
+                    case 2: return 1.2;
+
+                    case 3: return 1.3;
+
+                    case 4: return 1.4;
+
+                    case 5: return 1.5;
+
+                    case 6: return 1.6;
+
+                    case 7: return 1.8;
+
+                    case 8: return 2.0;
+
+                    default:return 0.0;
                 }
             }
         });

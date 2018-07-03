@@ -13,7 +13,7 @@ while True:
     data = conn.recv(1024) #how many bytes of data will the server received
     if data != '':
         print "Received: ", repr(data)
-        data = data[1:-1]
+        data = data[3:-1]
         f = open('gain.txt', 'w')
         f.write(data)
         f.close()
