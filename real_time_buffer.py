@@ -139,4 +139,3 @@ gain_range_3500_4000 = Gain[7];
 t1 = Thread(target=record_audio, args=())
 t2 = Thread(target=process_audio, args=())
 t1.start()
-

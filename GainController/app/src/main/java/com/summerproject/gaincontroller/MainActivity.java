@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 System.out.println("Thread started");
                 try {
-                    Socket s = new Socket("10.194.10.81", 7000);
+                    Socket s = new Socket("192.168.43.99", 7000);
                     DataOutputStream dos = new DataOutputStream(s.getOutputStream());
                     while (true) {
                         while (flag) {
